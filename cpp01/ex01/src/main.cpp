@@ -19,5 +19,6 @@ int main() {
     Zombies = zombieHorde(N, "Greg");
     for (int i = 0; i < N; i++)
         Zombies[i].announce();
+    delete[] Zombies;
     return (0);
 }

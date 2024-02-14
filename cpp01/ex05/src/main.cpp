@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esteiner <esteiner@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/11 15:39:02 by esteiner          #+#    #+#             */
-/*   Updated: 2024/02/11 15:39:02 by esteiner         ###   ########.fr       */
+/*   Created: 2024/02/13 13:54:25 by esteiner          #+#    #+#             */
+/*   Updated: 2024/02/13 13:54:25 by esteiner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANA_HPP
-# define HUMANA_HPP
+#include "../Harl.hpp"
 
-#include "Weapon.hpp"
+int main()
+{
+    Harl newHarl;
+    std::string input;
 
-class HumanA {
-public:
-    void attack();
-    HumanA(std::string name, Weapon& my_weapon);
-    ~HumanA();
-private:
-    std::string _Name;
-    Weapon& _myWeapon;
-};
-
-
-#endif
+    std::cout << "Type number between 0 and 4:\n0 = exit\n1 = debug\n2 = info\n3 = warning\n4 = error\n" << std::endl;
+    while (1) {
+        std::cin >> input;
+        if (input == "0") {
+            return (0);
+        }
+        newHarl.complain(input);
+    }
+    return (0);
+}

@@ -12,7 +12,7 @@
 
 #include "../HumanA.hpp"
 
-HumanA::HumanA(std::string name, Weapon& my_weapon) : _Name(name), _myWeapon(&my_weapon) {
+HumanA::HumanA(std::string name, Weapon& my_weapon) : _Name(name), _myWeapon(my_weapon) {
     //std::cout << "HumanA " << this->_Name << " was created ";
     //std::cout << "with the Weapon " << this->_myWeapon->getType() << std::endl;
 }
