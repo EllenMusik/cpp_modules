@@ -12,20 +12,20 @@
 
 #include "../ClapTrap.hpp"
 
-ClapTrap::ClapTrap()  : _name("defaultClapTrap") , _hitPoints(10) , _energyPoints(10) , _attackDamage(0) {
-    std::cout << "\033[36mClapTrap default constructor called\033[0m" << std::endl;
+ClapTrap::ClapTrap() : _name("ClapTrap") , _hitPoints(10) , _energyPoints(10) , _attackDamage(0) {
+    std::cout << "\033[36mClapTrap default constructor called \033[0m" << std::endl;
 }
 
 ClapTrap::~ClapTrap() {
-    std::cout << "\033[36mClapTrap destructor called\033[0m" << std::endl;
+    std::cout << "\033[36mClapTrap destructor called \033[0m" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name) : _name(name) , _hitPoints(10) , _energyPoints(10) , _attackDamage(0){
-    std::cout << "\033[36mClapTrap name constructor called\033[0m" << std::endl;
+    std::cout << "\033[36mClapTrap name constructor called \033[0m" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &source) {
-    std::cout << "\033[36mClapTrap copy constructor called\033[0m" << std::endl;
+    std::cout << "\033[36mClapTrap copy constructor called \033[0m" << std::endl;
     *this = source;
 }
 
@@ -54,7 +54,7 @@ void    ClapTrap::attack(const std::string &target) {
 
 void    ClapTrap::takeDamage(unsigned int amount) {
     if (this->_hitPoints <= 0){
-        std::cout << "Already out of hit points!" << std::endl;
+        std::cout << this->_name << " is already out of hit points!" << std::endl;
         return ;
     }
     this->_hitPoints -= amount;
@@ -63,11 +63,11 @@ void    ClapTrap::takeDamage(unsigned int amount) {
 
 void ClapTrap::beRepaired(unsigned int amount) {
     if (this->_energyPoints <= 0) {
-        std::cout << "Out of Energy!" << std::endl;
+        std::cout << this->_name << " is out of Energy!" << std::endl;
         return ;
     }
     if (this->_hitPoints <= 0){
-        std::cout << "Out of hit points!" << std::endl;
+        std::cout << this->_name << " is out of hit points!" << std::endl;
         return ;
     }
     this->_energyPoints--;

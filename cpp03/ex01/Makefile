@@ -7,7 +7,7 @@ RM = rm -rf
 SRC_DIR	=	./src
 OBJ_DIR	=	./obj
 
-FILES	=  main ClapTrap
+FILES	=  main ClapTrap ScavTrap
 
 SRC		=	$(addsuffix .cpp, $(addprefix $(SRC_DIR)/, $(FILES)))
 OBJ		=	$(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(FILES)))
