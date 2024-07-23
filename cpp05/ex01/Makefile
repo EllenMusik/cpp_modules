@@ -1,4 +1,4 @@
-NAME = ex00
+NAME = ex01
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 #DEBUG = -fsanitize=adress -g
@@ -7,7 +7,7 @@ RM = rm -rf
 SRC_DIR	=	./src
 OBJ_DIR	=	./obj
 
-FILES	=  main Bureaucrat
+FILES	=  main Bureaucrat Form
 
 SRC		=	$(addsuffix .cpp, $(addprefix $(SRC_DIR)/, $(FILES)))
 OBJ		=	$(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(FILES)))

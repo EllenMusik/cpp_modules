@@ -12,62 +12,52 @@
 
 #include "../Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
-{
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               {
     if (grade < 1)
         throw Bureaucrat::GradeTooHighException();
     if (grade > 150)
         throw Bureaucrat::GradeTooLowException();
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &src) : _name(src._name), _grade(src._grade)
-{
+Bureaucrat::Bureaucrat(const Bureaucrat &src) : _name(src._name), _grade(src._grade) {
 }
 
-Bureaucrat::~Bureaucrat()
-{
+Bureaucrat::~Bureaucrat() {
 }
 
-Bureaucrat &Bureaucrat::operator=(const Bureaucrat &src)
-{
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &src) {
     if (this == &src)
         return *this;
     _grade = src._grade;
     return *this;
 }
 
-std::string Bureaucrat::getName() const
-{
+std::string Bureaucrat::getName() const {
     return _name;
 }
 
-int Bureaucrat::getGrade() const
-{
+int Bureaucrat::getGrade() const {
     return _grade;
 }
 
 
-void Bureaucrat::incrementGrade()
-{
+void Bureaucrat::incrementGrade() {
     if (_grade == 1)
         throw Bureaucrat::GradeTooHighException();
     _grade--;
 }
 
-void Bureaucrat::decrementGrade()
-{
+void Bureaucrat::decrementGrade() {
     if (_grade == 150)
         throw Bureaucrat::GradeTooLowException();
     _grade++;
 }
 
-const char* Bureaucrat::GradeTooHighException::what() const throw()
-{
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
     return "Grade is too high!";
 }
 
-const char* Bureaucrat::GradeTooLowException::what() const throw()
-{
+const char* Bureaucrat::GradeTooLowException::what() const throw() {
     return "Grade is too low!";
 }
 

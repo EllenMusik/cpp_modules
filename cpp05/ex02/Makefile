@@ -1,13 +1,13 @@
-NAME = ex00
+NAME = ex02
 CC = c++
-CFLAGS = -Wall -Werror -Wextra -std=c++98
-#DEBUG = -fsanitize=adress -g
+#CFLAGS = -Wall -Werror -Wextra -std=c++98
+#DEBUG = -fsanitize=adress -g#RobotomyRequestForm PresidentialPardonForm
 RM = rm -rf
 
 SRC_DIR	=	./src
 OBJ_DIR	=	./obj
 
-FILES	=  main Bureaucrat
+FILES	=  main Bureaucrat AForm ShrubberyCreationForm RobotomyRequestForm PresidentialPardonForm
 
 SRC		=	$(addsuffix .cpp, $(addprefix $(SRC_DIR)/, $(FILES)))
 OBJ		=	$(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(FILES)))
