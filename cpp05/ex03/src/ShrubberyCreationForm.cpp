@@ -17,7 +17,7 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", 145, 137) {
     _target = target;
-    _signed = false;
+    this->setSigned(false);
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy) {
@@ -25,10 +25,10 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy) 
 }
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &copy) {
+    if (this == &copy)
+        return *this;
     _target = copy._target;
-    _signed = copy._signed;
-    _execGrade = copy._execGrade;
-    _signGrade = copy._signGrade;
+    this->setSigned(copy.getSigned());
     return *this;
 }
 
@@ -40,10 +40,10 @@ AForm* ShrubberyCreationForm::create(const std::string& target) {
 }
 
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
-    if (!_signed)
+    if (!this->getSigned())
         throw AForm::FormNotSignedException();
 
-    if (executor.getGrade() > _execGrade)
+    if (executor.getGrade() > this->getExecGrade())
         throw AForm::GradeTooLowException();
 
     std::ofstream file;

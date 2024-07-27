@@ -11,15 +11,27 @@
 /* ************************************************************************** */
 
 #include "../Form.hpp"
+#include "../Bureaucrat.hpp"
 
-Form::Form() {
+Form::Form() :
+ _name("default"), _signed(false), _signGrade(1), _execGrade(1) {
 }
 
-Form::Form(std::string name, int signGrade, int execGrade) : _name(name), _signed(false), _signGrade(signGrade), _execGrade(execGrade) {
+Form::Form(std::string name, int signGrade, int execGrade) : _name(name), _signed(false), _signGrade(signGrade), _execGrade(execGrade){
     if (signGrade < 1 || execGrade < 1)
         throw Form::GradeTooHighException();
     if (signGrade > 150 || execGrade > 150)
         throw Form::GradeTooLowException();
+}
+
+Form::Form(const Form &src) : _name(src._name), _signed(src._signed), _signGrade(src._signGrade), _execGrade(src._execGrade) {
+}
+
+Form &Form::operator=(const Form &src) {
+    if (this == &src)
+        return *this;
+    _signed = src._signed;
+    return *this;
 }
 
 Form::~Form() {
@@ -42,13 +54,11 @@ std::string Form::getName() const {
 }
 
 void Form::beSigned(Bureaucrat &bureaucrat) {
-    std::cout << "test" << std::endl;
-    if (bureaucrat.getGrade() > _signGrade){
-        std::cout << bureaucrat.getName() << " couldn’t sign " << this->_name << " because ";
+    if (bureaucrat.getGrade() > _signGrade) {
         throw Form::GradeTooLowException();
     }
     _signed = true;
-    std::cout << bureaucrat.getName() << " signed " << _name << std::endl;
+    std::cout << _name << " was signed by " << bureaucrat.getName() << std::endl;
 }
 
 const char* Form::GradeTooHighException::what() const throw() {

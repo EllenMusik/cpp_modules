@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esteiner <esteiner@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: esteiner <esteiner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:52:20 by esteiner          #+#    #+#             */
-/*   Updated: 2024/05/14 15:52:20 by esteiner         ###   ########.fr       */
+/*   Updated: 2024/07/24 14:11:24 by esteiner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class AForm;
 class Bureaucrat
 {
 public:
+    Bureaucrat();
     Bureaucrat(std::string name, int grade);
     Bureaucrat(const Bureaucrat &src);
     ~Bureaucrat();

@@ -8,20 +8,17 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "colors.hpp"
 
 class Intern
 {
     public:
         Intern();
-        Intern(const Intern &other);
-        Intern &operator=(const Intern &other);
+        Intern(const Intern &src);
+        Intern &operator=(const Intern &src);
         ~Intern();
 
         AForm *makeForm(const std::string &name, const std::string &target);
-
-    private:
-        typedef AForm* (*FormCreator)(const std::string&);
-        std::map<std::string, FormCreator> form_creators;
 };
 
 #endif

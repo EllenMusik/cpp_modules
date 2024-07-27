@@ -12,7 +12,7 @@
 
 #include "../AForm.hpp"
 
-AForm::AForm() {
+AForm::AForm() : _name("default"), _signed(false), _signGrade(1), _execGrade(1) {
 }
 
 AForm::AForm(std::string name, int signGrade, int execGrade) : _name(name), _signed(false), _signGrade(signGrade), _execGrade(execGrade) {
@@ -22,11 +22,25 @@ AForm::AForm(std::string name, int signGrade, int execGrade) : _name(name), _sig
         throw AForm::GradeTooLowException();
 }
 
+AForm::AForm(const AForm &src) : _name(src._name), _signed(src._signed), _signGrade(src._signGrade), _execGrade(src._execGrade) {
+}
+
+AForm &AForm::operator=(const AForm &src) {
+    if (this == &src)
+        return *this;
+    _signed = src._signed;
+    return *this;
+}
+
 AForm::~AForm() {
 }
 
 bool AForm::getSigned() const {
     return _signed;
+}
+
+void AForm::setSigned(bool Signed){
+    _signed = Signed;
 }
 
 int AForm::getSignGrade() const {

@@ -15,10 +15,11 @@ int main() {
     RobotomyRequestForm Robotomy("Robot");
 
     worker.signForm(Shrubby);
-    std::cout << "what" << std::endl;
+
     worker.incrementGrade();
     worker.incrementGrade();
     worker.incrementGrade();
+
     worker.signForm(Shrubby);
     worker.executeForm(Shrubby);
     Abteilungsleiter.executeForm(Shrubby);

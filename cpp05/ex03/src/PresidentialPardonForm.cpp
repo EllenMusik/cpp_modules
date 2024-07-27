@@ -15,9 +15,9 @@
 #include "../colors.hpp"
 
 void PresidentialPardonForm::execute(Bureaucrat const & executor) const {
-    if (executor.getGrade() > _execGrade)
+    if (executor.getGrade() > this->getExecGrade())
         throw AForm::GradeTooLowException();
-    if (!_signed)
+    if (!this->getSigned())
         throw AForm::FormNotSignedException();
     std::cout << TURQUOISE << _target << " has been pardoned by Zafod Beeblebrox" << RST << std::endl;
 }
@@ -40,9 +40,7 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPard
     if (this == &copy)
         return *this;
     _target = copy._target;
-    _signed = copy._signed;
-    _execGrade = copy._execGrade;
-    _signGrade = copy._signGrade;
+    this->setSigned(copy.getSigned());
     return *this;
 }
 

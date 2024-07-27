@@ -26,8 +26,12 @@ class AForm {
 public:
     AForm();
     AForm(std::string name, int signGrade, int execGrade);
+    AForm(const AForm& src);
+    AForm &operator=(const AForm& src);
     virtual ~AForm();
+
     bool            getSigned() const;
+    void            setSigned(bool Signed);
     int             getSignGrade() const;
     int             getExecGrade() const;
     std::string     getName() const;
@@ -50,11 +54,11 @@ public:
     };
 
 
-        protected:
-    std::string _name;
-    bool        _signed;
-    int         _signGrade;
-    int         _execGrade;
+private:
+    const std::string _name;
+    bool              _signed;
+    const int         _signGrade;
+    const int         _execGrade;
 };
 
 std::ostream &operator<<(std::ostream &o, const AForm &rhs);

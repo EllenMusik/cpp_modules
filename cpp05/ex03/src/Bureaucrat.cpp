@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esteiner <esteiner@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: esteiner <esteiner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 16:04:40 by esteiner          #+#    #+#             */
-/*   Updated: 2024/05/14 16:04:40 by esteiner         ###   ########.fr       */
+/*   Updated: 2024/07/24 14:11:56 by esteiner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,14 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
         throw Bureaucrat::GradeTooLowException();
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &src) : _name(src._name), _grade(src._grade){
+Bureaucrat::Bureaucrat(const Bureaucrat &src) {
+    _name = src._name;
+    _grade = src._grade;
+}
+
+Bureaucrat::Bureaucrat() {
+    _name = "default";
+    _grade = 150;
 }
 
 Bureaucrat::~Bureaucrat(){

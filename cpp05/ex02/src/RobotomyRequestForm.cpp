@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esteiner <esteiner@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: esteiner <esteiner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:29:36 by esteiner          #+#    #+#             */
-/*   Updated: 2024/05/23 16:29:36 by esteiner         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:20:26 by esteiner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include <time.h>
 
 void    RobotomyRequestForm::execute(Bureaucrat const & executor) const {
-    if (executor.getGrade() > _execGrade)
+    if (executor.getGrade() > this->getExecGrade())
         throw AForm::GradeTooLowException();
-    if (!_signed)
+    if (!this->getSigned())
         throw AForm::FormNotSignedException();
 
     std::cout << YELLOW2 << "*Drrrrrr-drrrrrr Drrrr-drrrilling noises*" << RST << std::endl;
@@ -40,7 +40,7 @@ RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45
 RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("RobotomyRequestForm", 72, 45), _target(target) {
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy) {
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy) : AForm(copy){
     *this = copy;
 }
 
@@ -48,9 +48,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &c
     if (this == &copy)
         return *this;
     _target = copy._target;
-    _signed = copy._signed;
-    _execGrade = copy._execGrade;
-    _signGrade = copy._signGrade;
+    this->setSigned(copy.getSigned());
     return *this;
 }
 

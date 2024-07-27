@@ -15,11 +15,16 @@
 
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form {
 public:
     Form();
     Form(std::string name, int signGrade, int execGrade);
+    Form(const Form& src);
+    Form &operator=(const Form& src);
     ~Form();
+
     bool            getSigned() const;
     int             getSignGrade() const;
     int             getExecGrade() const;
@@ -37,10 +42,10 @@ public:
     };
 
 private:
-    std::string      _name;
-    bool        _signed;
-    int         _signGrade;
-    int         _execGrade;
+    const std::string   _name;
+    bool                _signed;
+    const int           _signGrade;
+    const int           _execGrade;
 };
 
 std::ostream &operator<<(std::ostream &o, const Form &rhs);

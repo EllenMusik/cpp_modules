@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esteiner <esteiner@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: esteiner <esteiner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 16:04:40 by esteiner          #+#    #+#             */
-/*   Updated: 2024/05/14 16:04:40 by esteiner         ###   ########.fr       */
+/*   Updated: 2024/07/24 14:11:16 by esteiner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
         throw Bureaucrat::GradeTooLowException();
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &src) : _name(src._name), _grade(src._grade)
-{
+Bureaucrat::Bureaucrat(const Bureaucrat &src) : _name(src._name) {
+    _grade = src._grade;
 }
 
-Bureaucrat::~Bureaucrat()
-{
+Bureaucrat::Bureaucrat() {
+    _grade = 150;
+}
+
+Bureaucrat::~Bureaucrat(){
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &src)
@@ -35,6 +38,8 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &src)
     _grade = src._grade;
     return *this;
 }
+
+//-------------------------------------------------------------
 
 std::string Bureaucrat::getName() const
 {
@@ -48,10 +53,14 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::signForm(Form &form)
 {
-    if (_grade > form.getSignGrade())
-        throw Bureaucrat::GradeTooLowException();
-    std::cout << _name << " signs the form" << std::endl;
-    form.beSigned(*this);
+    try {
+        form.beSigned(*this);
+        std::cout << _name << " signed the form" << std::endl;
+    }
+    catch (std::exception &e) {
+        std::cout << _name << " couldn’t sign " << form.getName() << " because " << e.what() << std::endl;
+    }
+
 }
 
 void Bureaucrat::incrementGrade()

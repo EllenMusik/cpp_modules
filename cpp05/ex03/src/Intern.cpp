@@ -1,48 +1,39 @@
 #include "../Intern.hpp"
 
-AForm *Intern::makeForm(const std::string &name, const std::string &target) {
-    std::map<std::string, FormCreator>::iterator tmp = form_creators.find(name);
-    if (tmp != form_creators.end())
-    {
-        std::cout << "Intern creates " << name << " form" << std::endl;
-        return tmp->second(target);
+AForm *Intern::makeForm(const std::string &Name, const std::string &target) {
+    std::string Names[3] = {
+            "shrubbery creation",
+            "robotomy request",
+            "presidential pardon"
+    };
+
+    for (size_t i = 0; i < sizeof(Names) / sizeof(Names[0]); i++) {
+        if (Name == Names[i]) {
+            std::cout << "Intern creates " << Name << std::endl;
+            switch (i) {
+                case 0:
+                    return (new ShrubberyCreationForm(target));
+                case 1:
+                    return (new RobotomyRequestForm(target));
+                case 2:
+                    return (new PresidentialPardonForm(target));
+            }
+        }
     }
-    std::cout << "Intern doesn't know how to create " << name << " form" << std::endl;
-    return nullptr;
+    std::cout << "Intern cannot create " << Name << std::endl;
+    return NULL;
 }
-
-//AForm *Intern::makeForm(const std::string &name, const std::string &target) {
-//if (name == "presidential pardon") {
-//        std::cout << "Intern creates " << name << " form" << std::endl;
-//        return new PresidentialPardonForm(target);
-//    } else if (name == "robotomy request") {
-//        std::cout << "Intern creates " << name << " form" << std::endl;
-//        return new RobotomyRequestForm(target);
-//    } else if (name == "shrubbery creation") {
-//        std::cout << "Intern creates " << name << " form" << std::endl;
-//        return new ShrubberyCreationForm(target);
-//    }
-//    return nullptr;
-//}
-
-
-
-
-
 
 
 Intern::Intern() {
-    form_creators["presidential pardon"] = PresidentialPardonForm::create;
-    form_creators["robotomy request"] = RobotomyRequestForm::create;
-    form_creators["shrubbery creation"] = ShrubberyCreationForm::create;
 }
 
-Intern::Intern(const Intern &other) {
-    *this = other;
+Intern::Intern(const Intern &src) {
+    *this = src;
 }
 
-Intern &Intern::operator=(const Intern &other) {
-    (void)other;
+Intern &Intern::operator=(const Intern &src) {
+    (void)src;
     return *this;
 }
 

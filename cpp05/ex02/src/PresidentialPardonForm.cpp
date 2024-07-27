@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esteiner <esteiner@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: esteiner <esteiner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:29:26 by esteiner          #+#    #+#             */
-/*   Updated: 2024/05/23 16:29:26 by esteiner         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:20:04 by esteiner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "../colors.hpp"
 
 void PresidentialPardonForm::execute(Bureaucrat const & executor) const {
-    if (executor.getGrade() > _execGrade)
+    if (executor.getGrade() > this->getExecGrade())
         throw AForm::GradeTooLowException();
-    if (!_signed)
+    if (!this->getSigned())
         throw AForm::FormNotSignedException();
     std::cout << TURQUOISE << _target << " has been pardoned by Zafod Beeblebrox" << RST << std::endl;
 }
@@ -28,7 +28,7 @@ PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm
 PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("PresidentialPardonForm", 25, 5), _target(target) {
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &copy) {
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &copy) : AForm(copy) {
     *this = copy;
 }
 
@@ -36,9 +36,7 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPard
     if (this == &copy)
         return *this;
     _target = copy._target;
-    _signed = copy._signed;
-    _execGrade = copy._execGrade;
-    _signGrade = copy._signGrade;
+    this->setSigned(copy.getSigned());
     return *this;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esteiner <esteiner@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: esteiner <esteiner@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:52:20 by esteiner          #+#    #+#             */
-/*   Updated: 2024/05/14 15:52:20 by esteiner         ###   ########.fr       */
+/*   Updated: 2024/07/24 13:47:37 by esteiner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@
 #include <string>
 #include <exception>
 #include <stdio.h>
+#include "Form.hpp"
+
+class Form;
 
 class Bureaucrat
 {
 public:
+    Bureaucrat();
     Bureaucrat(std::string name, int grade);
     Bureaucrat(const Bureaucrat &src);
     ~Bureaucrat();
@@ -42,7 +46,7 @@ public:
     void incrementGrade();
     void decrementGrade();
 private:
-    std::string _name;
+    const std::string _name;
     int _grade;
 };
 

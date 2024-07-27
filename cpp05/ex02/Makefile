@@ -1,6 +1,6 @@
 NAME = ex02
 CC = c++
-#CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 #DEBUG = -fsanitize=adress -g#RobotomyRequestForm PresidentialPardonForm
 RM = rm -rf
 

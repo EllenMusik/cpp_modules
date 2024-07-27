@@ -17,9 +17,9 @@
 #include <time.h>
 
 void    RobotomyRequestForm::execute(Bureaucrat const & executor) const {
-    if (executor.getGrade() > _execGrade)
+    if (executor.getGrade() > this->getExecGrade())
         throw AForm::GradeTooLowException();
-    if (!_signed)
+    if (!this->getSigned())
         throw AForm::FormNotSignedException();
 
     std::cout << YELLOW2 << "*Drrrrrr-drrrrrr Drrrr-drrrilling noises*" << RST << std::endl;
@@ -50,9 +50,7 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &c
     if (this == &copy)
         return *this;
     _target = copy._target;
-    _signed = copy._signed;
-    _execGrade = copy._execGrade;
-    _signGrade = copy._signGrade;
+    this->setSigned(copy.getSigned());
     return *this;
 }
 
