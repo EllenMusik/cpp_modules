@@ -6,7 +6,7 @@
 /*   By: esteiner <esteiner@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 19:04:36 by esteiner          #+#    #+#             */
-/*   Updated: 2024/07/29 19:04:36 by esteiner         ###   ########.fr       */
+/*   Updated: 2024/08/07 17:38:21 by esteiner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../Serializer.hpp"
 #include "../Data.hpp"
 #include <stdint.h>
-#include "../colours.hpp"
+#include "../colors.hpp"
 
 
 

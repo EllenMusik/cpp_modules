@@ -26,5 +26,4 @@ public:
     void use(ICharacter& target);
 };
 
-
 #endif
