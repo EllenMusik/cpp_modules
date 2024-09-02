@@ -30,6 +30,17 @@ public:
     void addNumber(int nbr);
     void print_span() const;
 
+    template <typename InputIterator>
+    void addRange(InputIterator begin, InputIterator end)  {
+        for (InputIterator it = begin; it != end; ++it) {
+            if (_curr_elements == _max_elements) {
+                throw std::runtime_error("Cannot add Number: Max capacity of stored numbers reached.");
+            }
+            _int_array.insert(*it);
+            _curr_elements++;
+        }
+    }
+
     unsigned int shortestSpan() const;
     unsigned int longestSpan() const;
 
