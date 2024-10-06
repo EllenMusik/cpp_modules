@@ -17,7 +17,6 @@ int main(int argc, char **argv)
     {
         std::cerr << e.what() << '\n';
     }
-    exchange.validateData();
     return 0;
 }
 

@@ -9,6 +9,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <cstdlib>
+#include "Header.hpp"
 
 class BitcoinExchange
 {
@@ -19,16 +20,17 @@ public:
     void readDatabase(const std::string &filename);
     void readInputFile(const std::string &filename);
 
-    void validateData();
+    bool validateData(int amount);
+    bool validateDate(const std::string &date);
 
-    float findMatchingDate();
+    std::map<t_Date, float>::iterator findMatchingDate();
 
     void calculateAndPrint();
 
 
 private:
-    std::map<std::string, float> database;
-    std::map<std::string, float> inputData;
+    std::map<t_Date, float> _database;
+    t_Date _currentInputDate;
 
     BitcoinExchange(const BitcoinExchange &source);
     BitcoinExchange &operator=(const BitcoinExchange &source);

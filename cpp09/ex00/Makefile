@@ -1,4 +1,4 @@
-NAME = ex00
+NAME = bitcoin
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 #DEBUG = -fsanitize=address -g
