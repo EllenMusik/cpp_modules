@@ -38,6 +38,7 @@ private:
 
     double _vectorTime;
     double _dequeTime;
+    double _compareTime;
 };
 
 

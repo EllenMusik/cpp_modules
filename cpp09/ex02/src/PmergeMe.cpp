@@ -59,10 +59,10 @@ std::vector<double> generateJacobsthal(int n) {
 void PmergeMe::sorting() {
 
     _jacobSeq = generateJacobsthal(22);
-    std::cout << _jacobSeq.size() << std::endl;
-    for (size_t i = 0; _jacobSeq.size() > i; ++i) {
-        std::cout << _jacobSeq[i] << ", ";
-    }
+//    std::cout << _jacobSeq.size() << std::endl;
+//    for (size_t i = 0; _jacobSeq.size() > i; ++i) {
+//        std::cout << _jacobSeq[i] << ", ";
+//    }
 
     clock_t start = clock();
     fordJohnsonSortVector(_arrVec);  // Vector sorting
@@ -82,6 +82,11 @@ void PmergeMe::sorting() {
 
     _dequeTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;  // Time calculation for Deque
 
+
+    start = clock();
+    std::sort(_compareVec.begin(), _compareVec.end());
+    end = clock();
+    _compareTime = static_cast<double>(end - start) / CLOCKS_PER_SEC;  // Time calculation for std::sort
     std::cout << TURQUOISE << "After sorting Deque: " << RST << std::endl;
     for (size_t i = 0; i < _arrDeq.size(); ++i) {
         std::cout << _arrDeq[i] << " ";
@@ -92,6 +97,7 @@ void PmergeMe::sorting() {
 void PmergeMe::printing() {
     std::cout << PINK << "Time to process a range of " << _size << " Elements with " << PASTEL_PINK << "std::vector: " << _vectorTime << "s" << RST << std::endl;
     std::cout << ORANGE << "Time to process a range of " << _size << " Elements with " << BRIGHT_ORANGE << "std::deque:  " << _dequeTime << "s" << RST << std::endl;
+    std::cout << TEAL << "Time to process a range of " << _size << " Elements with " << PASTEL_BLUE << "std::sort:   " << _compareTime << "s" << RST << std::endl;
 }
 
 template <typename Container>
@@ -142,14 +148,14 @@ void PmergeMe::fordJohnsonSortVector(std::vector<int> &arr) {
 
     //inserting the lower number of each pair into the sorted (normal) vector, in the order of jacobsthal sequence
     size_t i;
-
+    binary_insert_numbers(sorted, sorted_pairs[1].second);  //new: inserting the number at [1]
     for (i = 2; _jacobSeq[i] < _size / 2; ++i) {
         for (int f = _jacobSeq[i]; f > _jacobSeq[i - 1]; --f) {
             binary_insert_numbers(sorted, sorted_pairs[f].second);
         }
     }
     //inserting the rest above the jacobsthal sequence last fitting number
-    for (i = _jacobSeq[i - 1]; i < sorted_pairs.size(); ++i) {
+    for (i = _jacobSeq[i - 1] + 1; i < sorted_pairs.size(); ++i) {  //new: + 1 so no double numbers
         binary_insert_numbers(sorted, sorted_pairs[i].second);
     }
 
@@ -190,13 +196,14 @@ void PmergeMe::fordJohnsonSortDeque(std::deque<int>& arr) {
 
     //inserting the lower number of each pair into the sorted vector is the order of jacobsthal sequence
     size_t i;
+    binary_insert_numbers(sorted, sorted_pairs[1].second);
     for (i = 2; _jacobSeq[i] < _size / 2; ++i) {
         for (int f = _jacobSeq[i]; f > _jacobSeq[i - 1]; --f) {
             binary_insert_numbers(sorted, sorted_pairs[f].second);
         }
     }
     //inserting the rest above the jacobsthal sequence last fitting number
-    for (i = _jacobSeq[i - 1]; i < sorted_pairs.size(); ++i) {
+    for (i = _jacobSeq[i - 1] + 1; i < sorted_pairs.size(); ++i) {
         binary_insert_numbers(sorted, sorted_pairs[i].second);
     }
 
@@ -212,44 +219,6 @@ void PmergeMe::fordJohnsonSortDeque(std::deque<int>& arr) {
     _arrDeq = sorted;
 
 }
-
-
-//void PmergeMe::fordJohnsonSortDeque(std::deque<int>& arr) {
-//    if (arr.size() <= 1) return;
-//
-//    // Step 1: Initial Pairing
-//    std::deque<int> pairs;
-//    for (size_t i = 0; i < arr.size() - 1; i += 2) {
-//        if (arr[i] > arr[i + 1]) std::swap(arr[i], arr[i + 1]);
-//        pairs.push_back(arr[i]);
-//        pairs.push_back(arr[i + 1]);
-//    }
-//    if (arr.size() % 2 != 0) {
-//        pairs.push_back(arr.back());
-//    }
-//
-//    // Step 2: Merging Pairs
-//    std::deque<int> sorted;
-//    for (size_t i = 0; i < pairs.size(); i += 2) {
-//        sorted.push_back(pairs[i]);
-//    }
-//    for (size_t i = 1; i < pairs.size(); i += 2) {
-//        sorted.push_back(pairs[i]);
-//    }
-//    std::sort(sorted.begin(), sorted.end());
-//
-//    // Step 3: Insertion Phase
-//    for (size_t i = pairs.size(); i < arr.size(); ++i) {
-//        std::deque<int>::iterator pos = std::lower_bound(sorted.begin(), sorted.end(), arr[i]);
-//        sorted.insert(pos, arr[i]);
-//    }
-//
-//    // Copy back to original array
-//    _arrDeq = sorted;
-//}
-
-
-
 
 PmergeMe::PmergeMe() : _size(0), _vectorTime(0), _dequeTime(0) {}
 

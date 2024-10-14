@@ -31,7 +31,7 @@ void RPN::calculate(char *str)
             std::cout << TEAL << "Pushing: " << TURQUOISE << str[i] - '0' << RST << std::endl;
             _stack.push(str[i] - '0');
         }
-        else if (str[i] == '+')
+        else if (str[i] == '+' && _stack.size() > 1)
         {
             int a = _stack.top();
             _stack.pop();
@@ -39,8 +39,9 @@ void RPN::calculate(char *str)
             _stack.pop();
             std::cout << YELLOW << "Adding: " << PASTEL_YELLOW << b << " + " << a << RST << std::endl;
             _stack.push(b + a);
+            std::cout << BLUE << "Pushing: " << PASTEL_BLUE << b + a << RST << std::endl;
         }
-        else if (str[i] == '-')
+        else if (str[i] == '-' && _stack.size() > 1)
         {
             int a = _stack.top();
             _stack.pop();
@@ -48,8 +49,9 @@ void RPN::calculate(char *str)
             _stack.pop();
             std::cout << YELLOW << "Subtracting: " << PASTEL_YELLOW << b << " - " << a << RST << std::endl;
             _stack.push(b - a);
+            std::cout << BLUE << "Pushing: " << PASTEL_BLUE << b - a << RST << std::endl;
         }
-        else if (str[i] == '*')
+        else if (str[i] == '*' && _stack.size() > 1)
         {
             int a = _stack.top();
             _stack.pop();
@@ -57,8 +59,9 @@ void RPN::calculate(char *str)
             _stack.pop();
             std::cout << YELLOW << "Multiplying: " << PASTEL_YELLOW << b << " * " << a << RST << std::endl;
             _stack.push(b * a);
+            std::cout << BLUE << "Pushing: " << PASTEL_BLUE << b * a << RST << std::endl;
         }
-        else if (str[i] == '/')
+        else if (str[i] == '/' && _stack.size() > 1 && _stack.top() != 0)
         {
             int a = _stack.top();
             _stack.pop();
@@ -66,6 +69,7 @@ void RPN::calculate(char *str)
             _stack.pop();
             std::cout << YELLOW << "Dividing: " << PASTEL_YELLOW << b << " / " << a << RST << std::endl;
             _stack.push(b / a);
+            std::cout << BLUE << "Pushing: " << PASTEL_BLUE << b / a << RST << std::endl;
         }
         else
         {

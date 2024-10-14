@@ -1,5 +1,6 @@
 #include "../BitcoinExchange.hpp"
 #include "../colors.hpp"
+#include <cstring>
 
 
 BitcoinExchange::BitcoinExchange()
@@ -13,6 +14,15 @@ BitcoinExchange::~BitcoinExchange()
 //
 //BitcoinExchange::BitcoinExchange &operator=(const BitcoinExchange &source)
 //{}
+
+bool is_all_num(const char *str) {
+    for (size_t i = 0; i < strlen(str); ++i) {
+        if (isdigit(str[i]) == false && str[i] != '.') {
+            return false;
+        }
+    }
+    return true;
+}
 
 t_Date convertStringToDate(const std::string &date)
 {
@@ -65,6 +75,7 @@ void BitcoinExchange::readInputFile(const std::string &filename)
     while (std::getline(inputFile, line))
     {
         std::string date;
+        std::string str_price;
         float price;
         std::string temp;
         std::string temp2;
@@ -73,7 +84,13 @@ void BitcoinExchange::readInputFile(const std::string &filename)
             std::cerr << RED << "Error: stream failed: " << line << RST << std::endl;
             continue;
         }
-        stream >> date >> temp >> price >> temp2;
+        stream >> date >> temp >> str_price >> temp2;
+        if (!is_all_num(str_price.c_str()))
+        {
+            std::cerr << RED << "Error: invalid input: " << line << RST << std::endl;
+            continue;
+        }
+        price = atoi(str_price.c_str());
         if (!temp2.empty() || temp2 != "" || temp != "|"){
             std::cerr << RED << "Error: invalid input: " << line << RST << std::endl;
             continue;
