@@ -32,7 +32,7 @@ private:
     std::vector<int> _arrVec;
     std::deque<int> _arrDeq;
 
-    std::vector<int> _jacobSeq;
+    std::vector<double> _jacobSeq;
     int _size;
 
     double _vectorTime;
